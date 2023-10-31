@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        h1{
+            font-size: 50px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bolder;
+        }
+        button{
+            padding: 20px;
+            border: 1px solid goldenrod;
+            border-radius: 50%;
+            background-color: rgba(240, 248, 255, 0);
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: rgba(240, 248, 255, 0.267);
+        }
+        button img{
+            width: 80px;
+            height: 80px;
+        }
+        #gameresult{
+            font-size: 40px;
+        }
+        #description-result{
+            font-size: 20px;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Rock Paper Sesor</h1>
+    <div class="container">
+    <button onclick="rockbutton()"><img src="rockimg.png" alt="Rock hand"></button>
+    <button onclick="paperbutton()"><img src="paperimg.png" alt="Paper hand"></button>
+    <button onclick="scissorbutton()"><img src="scissorimg.png" alt="Scissor hand"></button>
+</div>
+    <p id="gameresult"></p>
+    <p id="description-result"></p>
+
+    <script>
+        const randomNumber=  Math.random();
+        let computerMove = '';
+        let result='';
+        const gameResult = document.getElementById("gameresult");
+        const descriptionResult = document.getElementById("description-result");
+        const numberr = function randomNumberr(){
+        if(randomNumber >= 0 && randomNumber< 1/3 ){
+             computerMove='Rock';
+        }
+        else if(randomNumber >= 1/3 && randomNumber< 2/3 ){
+             computerMove='Paper';
+        }
+        else if(randomNumber >= 2/3 && randomNumber< 1 ){
+             computerMove='Scissors';
+        };
+       }
+       function rockbutton(){
+        numberr();
+        if (computerMove ==='Rock'){
+            result= "Tie";
+            gameResult.innerHTML =result;
+            descriptionResult.innerHTML ="You both chose Rock! It's a tie.";
+        }else if(computerMove === 'Paper'){
+            result= "You lose";
+            gameResult.innerHTML = result;
+            descriptionResult.innerHTML ="You rock and the computer  paper ";
+        }else if(computerMove ==='Scissors'){
+            result= "You win";
+            gameResult.innerHTML = result;
+            descriptionResult.innerHTML ="You rock and the computer scissors ";
+        }
+
+       };
+       function paperbutton(){
+        numberr;
+        if (computerMove ==='Rock'){
+            result= "You win";
+            gameResult.innerHTML = result;
+            descriptionResult.innerHTML ="You paper and the computer rock ";
+        }else if(computerMove === 'Paper'){
+            result= "Tie";
+            gameResult.innerHTML = result;
+            descriptionResult.innerHTML ="You both chose Paper! It's a tie.";
+        }else if(computerMove ==='Scissors'){
+            result= "You Lose";
+            gameResult.innerHTML = result;
+            descriptionResult.innerHTML ="You paper and the computer scissors ";
+        }
+       };
+       function scissorbutton(){
+        numberr;
+        if (computerMove ==='Rock'){
+            result= "You Lose";
+            gameResult.innerHTML = result;
+            descriptionResult.innerHTML ="You scissors and the computer rock ";
+        }else if(computerMove === 'Paper'){
+            result= "You Win";
+            gameResult.innerHTML = result;
+            descriptionResult.innerHTML ="You scissors and the computer paper ";
+        }else if(computerMove ==='Scissors'){
+            result= "Tie";
+            gameResult.innerHTML = result;
+            descriptionResult.innerHTML ="You both chose Scissors! It's a tie.";
+        }
+       };
+    </script>
+</body>
+</html>
