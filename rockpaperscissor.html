@@ -29,6 +29,9 @@
         button:hover{
             background-color: rgba(240, 248, 255, 0.267);
         }
+        button:last-child{
+            color: wheat;
+        }
         button img{
             width: 80px;
             height: 80px;
@@ -40,25 +43,39 @@
             font-size: 20px;
         }
     </style>
-
 </head>
 <body>
     <h1>Rock Paper Sesor</h1>
     <div class="container">
-    <button onclick="rockbutton()"><img src="rockimg.png" alt="Rock hand"></button>
-    <button onclick="paperbutton()"><img src="paperimg.png" alt="Paper hand"></button>
-    <button onclick="scissorbutton()"><img src="scissorimg.png" alt="Scissor hand"></button>
+    <button onclick="gameplay('rock')"><img src="rockimg.png" alt="Rock hand"></button>
+    <button onclick="gameplay('paper')"><img src="paperimg.png" alt="Paper hand"></button>
+    <button onclick="gameplay('scissors')"><img src="scissorimg.png" alt="Scissor hand"></button>
+    <button onclick="resetScore()">Reset</button>
 </div>
     <p id="gameresult"></p>
     <p id="description-result"></p>
-
     <script>
+
+
+        let score =JSON.parse(localStorage.getItem("score")) || 
+        {
+            win:0,
+            lose:0,
+            tie:0
+        };
+        function resetScore() {
+            score = {
+              win: 0,
+              lose: 0,
+              tie: 0
+            };
+            localStorage.removeItem('score');
+          }
+        let gameResult = document.getElementById("gameresult");
+        const descriptionResult = document.getElementById("description-result");
+       function randomNumberr(){
         const randomNumber=  Math.random();
         let computerMove = '';
-        let result='';
-        const gameResult = document.getElementById("gameresult");
-        const descriptionResult = document.getElementById("description-result");
-        const numberr = function randomNumberr(){
         if(randomNumber >= 0 && randomNumber< 1/3 ){
              computerMove='Rock';
         }
@@ -68,56 +85,56 @@
         else if(randomNumber >= 2/3 && randomNumber< 1 ){
              computerMove='Scissors';
         };
+        return computerMove;
        }
-       function rockbutton(){
-        numberr();
-        if (computerMove ==='Rock'){
-            result= "Tie";
-            gameResult.innerHTML =result;
-            descriptionResult.innerHTML ="You both chose Rock! It's a tie.";
-        }else if(computerMove === 'Paper'){
-            result= "You lose";
-            gameResult.innerHTML = result;
-            descriptionResult.innerHTML ="You rock and the computer  paper ";
-        }else if(computerMove ==='Scissors'){
-            result= "You win";
-            gameResult.innerHTML = result;
-            descriptionResult.innerHTML ="You rock and the computer scissors ";
+       function gameplay(playerMove){
+            randomNumberr();
+            const computerMove = randomNumberr();
+            let result='';  
+            //playerMove == rock
+            if(playerMove === "rock"){
+                if (computerMove ==='Rock'){
+                    result= "Tie";
+                }else if(computerMove === 'Paper'){
+                    result= "You Lose";
+                }else if(computerMove ==='Scissors'){
+                    result= "You Win";
+                }
+            }//palyermove==paper
+            else if(playerMove=== "paper"){
+                if (computerMove ==='Rock'){
+                    result= "You win";
+                }else if(computerMove === 'Paper'){
+                    result= "Tie";
+                }else if(computerMove ==='Scissors'){
+                    result= "You Lose";
+                }
+
+            }//playermove== scissors
+            else if(playerMove ==="scissors"){
+                if (computerMove ==='Rock'){
+                    result= "You Lose";
+                }else if(computerMove === 'Paper'){
+                    result= "You Win";
+                }else if(computerMove ==='Scissors'){
+                    result= "Tie";
+                }
+            }
+            if (result === "You Win"){
+                score.win +=1;
+            }else if(result === "You Lose"){
+                score.lose +=1;
+            }else if(result === "Tie"){
+                score.tie +=1
+            }
+            gameResult.innerHTML = `Wins: ${score.win}` + " " + ` Lose: ${score.lose}
+            ` + " " + `Tie: ${score.tie}`;
+            localStorage.setItem("score", JSON.stringify(score));
+            descriptionResult.innerHTML =`You chose ${playerMove}! and computer choose ${computerMove} It's a ${result}.`;
         }
 
-       };
-       function paperbutton(){
-        numberr;
-        if (computerMove ==='Rock'){
-            result= "You win";
-            gameResult.innerHTML = result;
-            descriptionResult.innerHTML ="You paper and the computer rock ";
-        }else if(computerMove === 'Paper'){
-            result= "Tie";
-            gameResult.innerHTML = result;
-            descriptionResult.innerHTML ="You both chose Paper! It's a tie.";
-        }else if(computerMove ==='Scissors'){
-            result= "You Lose";
-            gameResult.innerHTML = result;
-            descriptionResult.innerHTML ="You paper and the computer scissors ";
-        }
-       };
-       function scissorbutton(){
-        numberr;
-        if (computerMove ==='Rock'){
-            result= "You Lose";
-            gameResult.innerHTML = result;
-            descriptionResult.innerHTML ="You scissors and the computer rock ";
-        }else if(computerMove === 'Paper'){
-            result= "You Win";
-            gameResult.innerHTML = result;
-            descriptionResult.innerHTML ="You scissors and the computer paper ";
-        }else if(computerMove ==='Scissors'){
-            result= "Tie";
-            gameResult.innerHTML = result;
-            descriptionResult.innerHTML ="You both chose Scissors! It's a tie.";
-        }
-       };
+       
+
     </script>
 </body>
 </html>
