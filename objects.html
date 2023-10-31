@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       const object1={
+            message: "hello",
+            number: 722
+        }
+        const {message, number} = object1;
+        console.log(message);
+        console.log(number);
+        const object2={
+            message:message
+        }
+        console.log(object2);
+        const object3 ={
+            method(){
+                console.log("method")
+            }
+        }
+        object3.method();
+        const amazon = {
+            product: "basketball",
+            price: 2095
+        }
+        console.log(amazon);
+        console.log(amazon.product);
+        console.log(amazon.price);
+        amazon.price=2595
+        console.log(amazon.price);
+        product['dilivery-time']= '3 days';
+        console.log(product);
+       const product1={
+            name: "t-shirt",
+            price: 200
+        }
+        const product2={
+            name: "t-shirt",
+            price: 100
+        }
+        function comparePrice(){
+            if (product1.price > product2.price){
+                console.log(product2)
+        }else if (product2.price > product1.price){
+            console.log(product1)
+        }}
+        comparePrice();
+        function isSameproduct(product1, product2){
+            if(product1.name=== product2.name&& product1.price === product2.price){
+                return true;
+            }else {
+                return false;
+            }
+        }
+        console.log(isSameproduct(product1, product2));
+      console.log("Good Morning".toLowerCase());
+        console.log("GOOD MORNING".toLowerCase());
+        console.log("good morning".toUpperCase())
+        console.log("text".repeat(2))
+        
+
+        </script>
+</body>
+</html>
