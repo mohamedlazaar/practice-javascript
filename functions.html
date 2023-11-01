@@ -41,6 +41,25 @@
         }
         console.log(convertTemperature(25,'C'))
         console.log(convertTemperature(86,'F'))
+        //*************************************
+              const score =JSON.parse(localStorage.getItem('score')) || 
+        {
+            win:0,
+            lose:0,
+        };
+        function getGuess(guess){
+            const num = Math.random();
+           const result = num<0.5 ? "Heads": "Tails"
+           console.log(result === guess ? `You win  `: `You lose `);
+           if(result===guess){
+            score.win++;
+           }else{
+            score.lose++;
+           }
+           console.log(score);
+           localStorage.setItem('score', JSON.stringify(score))
+        }
+        
     </script>
 
 </body>
